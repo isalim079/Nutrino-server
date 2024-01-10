@@ -29,10 +29,19 @@ async function run() {
             .db("nutrinoDB")
             .collection("nutritionTipsHome");
 
+        const recipeHome = client.db("nutrinoDB").collection("recipeHome");
+
         // getting data from nutritionTips
         app.get("/nutritionTips", async (req, res) => {
             const cursor = nutritionTips.find();
             const result = await cursor.toArray();
+            res.send(result);
+        });
+
+        // getting data from recipeHome
+        app.get("/recipe", async (req, res) => {
+            const recipeData = recipeHome.find();
+            const result = await recipeData.toArray();
             res.send(result);
         });
 
